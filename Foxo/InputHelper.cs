@@ -1,6 +1,4 @@
-﻿using Foxo;
-
-namespace FoxoLib
+﻿namespace Foxo
 {
     public class InputHelper
     {

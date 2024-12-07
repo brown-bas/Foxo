@@ -1,6 +1,4 @@
 ﻿using Foxo;
-using FoxoLib;
-using System.Linq.Expressions;
 
 /* TODO: Redraw content on window size change
 var listenerThread = new Thread(DisplayHelper.WindowSizeChangeListener)

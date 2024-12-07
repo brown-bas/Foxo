@@ -1,15 +1,10 @@
 ﻿using FoxoLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foxo
 {
     public class MenuHelper
     {
-        public static Game CurrentGame { get; private set; }
+        public static Game? CurrentGame { get; private set; }
         public static string CurrentMenu { get; private set; } = "MainMenu";
         public static int CurrentMenuSlot { get; private set; }
         public static void MainMenu()
@@ -130,10 +125,13 @@ namespace Foxo
                             fomp.ToggleSleep();
                             game.SaveState();
                         break;
+                        case 'p':
+                            fomp.Pet();
+                            game.SaveState();
+                        break;
                         case 'q':
                             game.SaveState();
                             return;
-                        break;
                     }
                 }
                 Console.Beep(); //beep :3

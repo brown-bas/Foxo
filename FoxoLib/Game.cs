@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
+﻿using System.Timers;
 
-namespace Foxo
+namespace FoxoLib
 {
     public class Game
     {
@@ -20,10 +15,11 @@ namespace Foxo
             {
                 List<string> data = [];
                 foreach (var row in File.ReadAllLines($"./saves/{SlotNum}.fomp")) data.Add(row[(row.IndexOf(':') + 1)..]);
-                if (!DateTime.TryParse(data[5], out DateTime t) || t.Subtract(DateTime.Now) > TimeSpan.Zero) throw new SaveFileException();
+                if (data.Count != 9 || !DateTime.TryParse(data[7], out DateTime t) || t > DateTime.Now) throw new SaveFileException();
                 try
                 {
-                    Fomp = new(int.Parse(data[1]), int.Parse(data[2]), int.Parse(data[3]), data[0], bool.Parse(data[4]), DateTime.Parse(data[5]), DateTime.Parse(data[6]));
+                    //Name:0 HP:1 Happiness:2 Hunger:3 Energy:4 IsSleeping:5 LastFed:6 LastPet:7 SaveDate:8
+                    Fomp = new(data[0], int.Parse(data[1]), int.Parse(data[2]), int.Parse(data[3]), int.Parse(data[4]), bool.Parse(data[5]), DateTime.Parse(data[6]), DateTime.Parse(data[7]), DateTime.Parse(data[8]));
                     SaveState();
                 } catch (Exception)
                 {
@@ -32,7 +28,7 @@ namespace Foxo
             }
             else {
                 if (!Directory.Exists("./saves/")) Directory.CreateDirectory("./saves/");
-                Fomp = new(3, 0, 100, fompName!, false, DateTime.Now, DateTime.Now);
+                Fomp = new(fompName!, 3, 100, 0, 100, false, DateTime.Now, DateTime.Now, DateTime.Now);
                 SaveState();
             }
 
@@ -46,7 +42,7 @@ namespace Foxo
         {
             Fomp.SaveDate = DateTime.Now;
             StreamWriter writer = new($"./saves/{SlotNum}.fomp");
-            writer.Write($"Name:{Fomp.Name}\nHP:{Fomp.HP}\nHunger:{Fomp.Hunger}\nEnergy:{Fomp.Energy}\nIsSleeping:{Fomp.IsSleeping}\nLastFed:{Fomp.LastFed}\nSaveDate:{Fomp.SaveDate}");
+            writer.Write($"Name:{Fomp.Name}\nHP:{Fomp.HP}\nHappiness:{Fomp.Happiness}\nHunger:{Fomp.Hunger}\nEnergy:{Fomp.Energy}\nIsSleeping:{Fomp.IsSleeping}\nLastFed:{Fomp.LastFed}\nLastPet:{Fomp.LastPet}\nSaveDate:{Fomp.SaveDate}");
             writer.Close();
         }
 

@@ -1,11 +1,4 @@
-﻿using FoxoLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Foxo
+﻿namespace Foxo
 {
     public class DisplayHelper
     {
@@ -23,7 +16,7 @@ namespace Foxo
             Console.WriteLine();
         }
 
-        /* TODO: bruh
+        /*
         public static void WindowSizeChangeListener()
         {
             int initialWidth = Console.WindowWidth;
@@ -33,10 +26,10 @@ namespace Foxo
             {
                 if (Console.WindowWidth != initialWidth || Console.WindowHeight != initialHeight)
                 {
-                    Console.Clear();
+                    //Console.Clear();
                     switch (MenuHelper.CurrentMenu)
                     {
-                        case "MainMenu":
+                        /*case "MainMenu":
                             MenuHelper.MainMenu();
                         break;
                         case "SlotMenu":
